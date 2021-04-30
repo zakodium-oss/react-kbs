@@ -1,0 +1,65 @@
+{
+  "name": "react-kbs",
+  "version": "0.0.0",
+  "description": "React library to manage application's keyboard shortcuts",
+  "homepage": ".",
+  "main": "./lib-cjs/index.js",
+  "module": "./lib-esm/index.js",
+  "files": [
+    "lib-cjs",
+    "lib-esm"
+  ],
+  "scripts": {
+    "build": "craco build",
+    "check-types": "tsc --noEmit",
+    "compile": "npm run compile-cjs && npm run compile-esm",
+    "compile-cjs": "tsc --project tsconfig.cjs.json",
+    "compile-esm": "tsc --project tsconfig.esm.json",
+    "dev": "craco start",
+    "eslint": "eslint .",
+    "eslint-fix": "npm run eslint -- --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "keyboard",
+    "shortcuts",
+    "shortcut"
+  ],
+  "license": "MIT",
+  "volta": {
+    "node": "16.0.0"
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.1.2",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.1",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "@zakodium/eslint-config": "^3.0.1",
+    "autoprefixer": "^9.8.6",
+    "eslint": "^7.25.0",
+    "postcss": "^7.0.35",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
+    "typescript": "^4.2.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

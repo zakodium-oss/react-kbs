@@ -1,3 +1,15 @@
-export function KbsProvider() {
-  return <div className="m-4 bg-red-200">Hello world!!!</div>;
+import { createContext, ReactNode } from 'react';
+
+export interface KbsProviderProps {
+  children: ReactNode;
+}
+
+const kbsDispatchContext = createContext<any>(null);
+
+export function KbsProvider(props: KbsProviderProps) {
+  return (
+    <kbsDispatchContext.Provider value={null}>
+      {props.children}
+    </kbsDispatchContext.Provider>
+  );
 }

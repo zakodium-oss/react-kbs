@@ -7,7 +7,9 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <KbsProvider />
+    <KbsProvider>
+      <div>TEST</div>
+    </KbsProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

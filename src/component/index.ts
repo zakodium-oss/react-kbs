@@ -1,1 +1,1 @@
-export { KbsProvider } from './KbsProvider';
+export * from './KbsProvider';

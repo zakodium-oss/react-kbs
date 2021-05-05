@@ -2,6 +2,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import Navigation from './Navigation';
+import Team from './Team';
 
 export function App() {
   return (
@@ -10,6 +11,7 @@ export function App() {
         <Navigation />
         <Switch>
           <Route exact path="/" component={Dashboard} />
+          <Route exact path="/team" component={Team} />
         </Switch>
       </div>
     </HashRouter>

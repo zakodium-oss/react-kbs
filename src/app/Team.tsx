@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { useKbsGlobalShortcuts } from '../component';
 
-export default function Dashboard() {
+export default function Team() {
   const [counter, setCounter] = useState(0);
   const shortcuts = useMemo(
     () => [
@@ -24,7 +24,7 @@ export default function Dashboard() {
   useKbsGlobalShortcuts(shortcuts);
   return (
     <div className="p-4">
-      Dashboard counter: {counter}. Press I to increment and D to decrement.
+      Team counter: {counter}. Press I to increment and D to decrement.
     </div>
   );
 }

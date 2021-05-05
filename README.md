@@ -1,2 +1,3 @@
 # react-kbs
-React library to manage application's keyboard shortcuts
+
+React library to manage your application's keyboard shortcuts.

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
 import { useKbsDispatch } from '../KbsProvider';
-import { KbsShortcut } from '../types';
+import { KbsDefinition } from '../types';
 
-export function useKbsGlobalShortcuts(shortcuts: KbsShortcut[]) {
+export function useKbsGlobal(shortcuts: KbsDefinition[]) {
   const kbsDispatch = useKbsDispatch();
   useEffect(() => {
     kbsDispatch({ type: 'INIT', shortcuts });

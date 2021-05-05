@@ -1,10 +1,10 @@
-import { useKbsShortcuts } from '../component/hooks/useKbsShortcuts';
+import { useKbs } from '../component';
 
 import { useCounter } from './useCounter';
 
 export default function ProjectsZone2() {
   const [counter, shortcuts] = useCounter();
-  const divProps = useKbsShortcuts(shortcuts);
+  const divProps = useKbs(shortcuts);
   return (
     <div
       {...divProps}

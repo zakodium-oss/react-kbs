@@ -1,10 +1,10 @@
 import { useCallback, useMemo, KeyboardEvent } from 'react';
 
-import { KbsShortcut } from '../types';
+import { KbsDefinition } from '../types';
 import { combineShortcuts } from '../utils/combineShortcuts';
 import { eventToKey } from '../utils/makeKey';
 
-export function useKbsShortcuts(shortcuts: KbsShortcut[]) {
+export function useKbs(shortcuts: KbsDefinition[]) {
   const combinedShortcuts = useMemo(() => combineShortcuts([shortcuts]), [
     shortcuts,
   ]);

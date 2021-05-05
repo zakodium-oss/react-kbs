@@ -10,7 +10,7 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
-import { useKbsGlobalShortcuts } from '../component';
+import { useKbsGlobal } from '../component';
 
 const navigation = [
   { name: 'Dashboard', icon: HomeIcon, href: '/' },
@@ -52,7 +52,7 @@ export default function Navigation() {
     ],
     [history, pathname],
   );
-  useKbsGlobalShortcuts(shortcuts);
+  useKbsGlobal(shortcuts);
 
   return (
     <div className="flex flex-col w-64 h-full pt-5 pb-4 overflow-y-auto bg-white border-r border-gray-200">

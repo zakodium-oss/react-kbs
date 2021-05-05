@@ -7,7 +7,7 @@ import {
   KeyboardEvent,
 } from 'react';
 
-import { KbsShortcut } from './types';
+import { KbsDefinition } from './types';
 import { combineShortcuts } from './utils/combineShortcuts';
 import { eventToKey } from './utils/makeKey';
 
@@ -16,14 +16,14 @@ export interface KbsProviderProps {
 }
 
 interface KbsState {
-  inputShortcuts: KbsShortcut[][];
-  combinedShortcuts: Record<string, KbsShortcut>;
+  inputShortcuts: KbsDefinition[][];
+  combinedShortcuts: Record<string, KbsDefinition>;
   enabled: boolean;
 }
 
 type KbsAction =
-  | { type: 'INIT'; shortcuts: KbsShortcut[] }
-  | { type: 'CLEANUP'; shortcuts: KbsShortcut[] };
+  | { type: 'INIT'; shortcuts: KbsDefinition[] }
+  | { type: 'CLEANUP'; shortcuts: KbsDefinition[] };
 
 const initialKbsState: KbsState = {
   inputShortcuts: [],

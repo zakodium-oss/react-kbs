@@ -1,11 +1,11 @@
-import { KbsShortcut } from '../types';
+import { KbsDefinition } from '../types';
 
 import { shortcutToKeys } from './makeKey';
 
 export function combineShortcuts(
-  allShortcuts: KbsShortcut[][],
-): Record<string, KbsShortcut> {
-  const result: Record<string, KbsShortcut> = {};
+  allShortcuts: KbsDefinition[][],
+): Record<string, KbsDefinition> {
+  const result: Record<string, KbsDefinition> = {};
   for (const shortcuts of allShortcuts) {
     for (const shortcut of shortcuts) {
       const keys = shortcutToKeys(shortcut);

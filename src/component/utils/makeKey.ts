@@ -1,6 +1,6 @@
 import { KeyboardEvent } from 'react';
 
-import { KbsShortcut, KbsShortcutKey } from '../types';
+import { KbsDefinition, KbsKeyDefinition } from '../types';
 
 import { isMultiplatformCtrlKey } from './macInterop';
 
@@ -16,7 +16,7 @@ const defaultModifiers: Modifiers = {
   alt: false,
 };
 
-export function shortcutToKeys(shortcut: KbsShortcut): string[] {
+export function shortcutToKeys(shortcut: KbsDefinition): string[] {
   if (typeof shortcut.shortcut === 'string') {
     return shortcutElementToKey(shortcut.shortcut, defaultModifiers);
   } else if (Array.isArray(shortcut.shortcut)) {
@@ -26,7 +26,7 @@ export function shortcutToKeys(shortcut: KbsShortcut): string[] {
   }
 }
 
-function shortcutObjectToKey(shortcut: string | KbsShortcutKey) {
+function shortcutObjectToKey(shortcut: string | KbsKeyDefinition) {
   return typeof shortcut === 'string'
     ? shortcutElementToKey(shortcut, defaultModifiers)
     : shortcutElementToKey(shortcut.key, shortcut);

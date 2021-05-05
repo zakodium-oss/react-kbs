@@ -10,4 +10,5 @@ export interface KbsKeyDefinition {
 export interface KbsDefinition {
   shortcut: string | KbsKeyDefinition | Array<string | KbsKeyDefinition>;
   handler: (event: KeyboardEvent<HTMLDivElement>) => void;
+  description?: string;
 }

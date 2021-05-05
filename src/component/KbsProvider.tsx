@@ -89,7 +89,7 @@ export function KbsProvider(props: KbsProviderProps) {
     ? {
         tabIndex: 0,
         style: divStyle,
-        onKeyDownCapture: handleKeyDown,
+        onKeyDown: handleKeyDown,
       }
     : null;
 

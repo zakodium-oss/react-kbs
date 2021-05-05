@@ -1,26 +1,9 @@
-import { useMemo, useState } from 'react';
-
 import { useKbsGlobalShortcuts } from '../component';
 
+import { useCounter } from './useCounter';
+
 export default function Dashboard() {
-  const [counter, setCounter] = useState(0);
-  const shortcuts = useMemo(
-    () => [
-      {
-        shortcut: 'i',
-        handler() {
-          setCounter((current) => current + 1);
-        },
-      },
-      {
-        shortcut: 'd',
-        handler() {
-          setCounter((current) => current - 1);
-        },
-      },
-    ],
-    [],
-  );
+  const [counter, shortcuts] = useCounter();
   useKbsGlobalShortcuts(shortcuts);
   return (
     <div className="p-4">

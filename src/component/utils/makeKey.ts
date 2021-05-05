@@ -12,17 +12,17 @@ interface Modifiers {
 
 const defaultModifiers: Modifiers = {
   ctrl: false,
-  shift: false,
+  shift: undefined,
   alt: false,
 };
 
 export function shortcutToKeys(shortcut: KbsShortcut): string[] {
   if (typeof shortcut.shortcut === 'string') {
-    return [shortcutElementToKey(shortcut.shortcut, defaultModifiers)];
+    return shortcutElementToKey(shortcut.shortcut, defaultModifiers);
   } else if (Array.isArray(shortcut.shortcut)) {
-    return shortcut.shortcut.map(shortcutObjectToKey);
+    return shortcut.shortcut.flatMap(shortcutObjectToKey);
   } else {
-    return [shortcutObjectToKey(shortcut.shortcut)];
+    return shortcutObjectToKey(shortcut.shortcut);
   }
 }
 
@@ -33,11 +33,16 @@ function shortcutObjectToKey(shortcut: string | KbsShortcutKey) {
 }
 
 export function shortcutElementToKey(shortcut: string, modifiers: Modifiers) {
-  return `key[${shortcut.toLowerCase()}]_ctrl[${boolToString(
+  const prefix = `key[${shortcut.toLowerCase()}]_ctrl[${boolToString(
     modifiers.ctrl,
-  )}]_alt[${boolToString(modifiers.alt)}]_shift[${boolToString(
-    modifiers.shift,
-  )}]`;
+  )}]_alt[${boolToString(modifiers.alt)}]`;
+  if (typeof modifiers.shift === 'boolean') {
+    return [`${prefix}_shift[${boolToString(modifiers.shift)}]`];
+  } else {
+    // If `shift` is not specified, allow it regardless of its state during the
+    // event. This is to support any keyboard layout.
+    return [`${prefix}_shift[true]`, `${prefix}_shift[false]`];
+  }
 }
 
 export function eventToKey(event: KeyboardEvent<HTMLDivElement>): string {

@@ -1,9 +1,13 @@
 import { KeyboardEvent } from 'react';
 
-export interface KbsShortcut {
-  key: string | string[];
-  handler: (event: KeyboardEvent<HTMLDivElement>) => void;
+export interface KbsShortcutKey {
+  key: string;
   ctrl?: boolean;
   alt?: boolean;
   shift?: boolean;
+}
+
+export interface KbsShortcut {
+  shortcut: string | KbsShortcutKey | Array<string | KbsShortcutKey>;
+  handler: (event: KeyboardEvent<HTMLDivElement>) => void;
 }

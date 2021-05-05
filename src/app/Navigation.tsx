@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -8,55 +7,55 @@ import {
   UsersIcon,
 } from '@heroicons/react/outline';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useMemo } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import { useKbsGlobalShortcuts } from '../component';
 
 const navigation = [
-  { name: 'Dashboard', icon: HomeIcon, href: '#' },
-  { name: 'Team', icon: UsersIcon, href: '#', count: 3 },
-  { name: 'Projects', icon: FolderIcon, href: '#', count: 4 },
-  { name: 'Calendar', icon: CalendarIcon, href: '#' },
-  { name: 'Documents', icon: InboxIcon, href: '#', count: 12 },
-  { name: 'Reports', icon: ChartBarIcon, href: '#' },
+  { name: 'Dashboard', icon: HomeIcon, href: '/' },
+  { name: 'Team', icon: UsersIcon, href: '/team', count: 3 },
+  { name: 'Projects', icon: FolderIcon, href: '/projects', count: 4 },
+  { name: 'Calendar', icon: CalendarIcon, href: '/calendar' },
+  { name: 'Documents', icon: InboxIcon, href: '/documents', count: 12 },
+  { name: 'Reports', icon: ChartBarIcon, href: '/reports' },
 ];
 
 export default function Navigation() {
-  const [currentItem, setCurrentItem] = useState(0);
+  const history = useHistory();
+  const { pathname } = useLocation();
 
-  function selectNextItem() {
-    setCurrentItem((currentItem) => {
-      if (currentItem < navigation.length - 1) {
-        return currentItem + 1;
-      }
-      return currentItem;
-    });
-  }
-
-  function selectPreviousItem() {
-    setCurrentItem((currentItem) => {
-      if (currentItem > 0) {
-        return currentItem - 1;
-      }
-      return currentItem;
-    });
-  }
-
-  useKbsGlobalShortcuts([
-    {
-      key: 'PageUp',
-      shift: true,
-      handler: selectPreviousItem,
-    },
-    {
-      key: 'PageDown',
-      shift: true,
-      handler: selectNextItem,
-    },
-  ]);
+  const shortcuts = useMemo(
+    () => [
+      {
+        shortcut: { key: 'PageUp', shift: true },
+        handler() {
+          const currentItem = navigation.findIndex(
+            (item) => item.href === pathname,
+          );
+          if (currentItem === -1 || currentItem === 0) return;
+          history.push(navigation[currentItem - 1].href);
+        },
+      },
+      {
+        shortcut: { key: 'PageDown', shift: true },
+        handler() {
+          const currentItem = navigation.findIndex(
+            (item) => item.href === pathname,
+          );
+          if (currentItem === -1 || currentItem === navigation.length - 1) {
+            return;
+          }
+          history.push(navigation[currentItem + 1].href);
+        },
+      },
+    ],
+    [history, pathname],
+  );
+  useKbsGlobalShortcuts(shortcuts);
 
   return (
-    <div className="flex flex-col flex-grow w-64 h-full pt-5 pb-4 overflow-y-auto bg-white border-r border-gray-200">
+    <div className="flex flex-col w-64 h-full pt-5 pb-4 overflow-y-auto bg-white border-r border-gray-200">
       <div className="flex items-center flex-shrink-0 px-4">
         <img
           className="w-auto h-8"
@@ -66,12 +65,12 @@ export default function Navigation() {
       </div>
       <div className="flex flex-col flex-grow mt-5">
         <nav className="flex-1 px-2 space-y-1 bg-white" aria-label="Sidebar">
-          {navigation.map((item, index) => (
-            <a
+          {navigation.map((item) => (
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className={clsx(
-                index === currentItem
+                item.href === pathname
                   ? 'bg-gray-100 text-gray-900'
                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                 'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
@@ -79,7 +78,7 @@ export default function Navigation() {
             >
               <item.icon
                 className={clsx(
-                  index === currentItem
+                  item.href === pathname
                     ? 'text-gray-500'
                     : 'text-gray-400 group-hover:text-gray-500',
                   'mr-3 h-6 w-6',
@@ -90,7 +89,7 @@ export default function Navigation() {
               {item.count ? (
                 <span
                   className={clsx(
-                    index === currentItem
+                    item.href === pathname
                       ? 'bg-white'
                       : 'bg-gray-100 group-hover:bg-gray-200',
                     'ml-auto inline-block py-0.5 px-3 text-xs font-medium rounded-full',
@@ -99,7 +98,7 @@ export default function Navigation() {
                   {item.count}
                 </span>
               ) : null}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

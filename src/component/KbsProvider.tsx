@@ -25,6 +25,14 @@ type KbsAction =
   | { type: 'INIT'; shortcuts: KbsShortcut[] }
   | { type: 'CLEANUP'; shortcuts: KbsShortcut[] };
 
+const initialKbsState: KbsState = {
+  inputShortcuts: [],
+  combinedShortcuts: {},
+  enabled: true,
+};
+
+export const kbsContext = createContext<KbsState>(initialKbsState);
+
 const kbsDispatchContext = createContext<Dispatch<KbsAction> | null>(null);
 
 export function useKbsDispatch() {
@@ -34,12 +42,6 @@ export function useKbsDispatch() {
   }
   return dispatch;
 }
-
-const initialKbsState: KbsState = {
-  inputShortcuts: [],
-  combinedShortcuts: {},
-  enabled: true,
-};
 
 function kbsReducer(state: KbsState, action: KbsAction): KbsState {
   switch (action.type) {
@@ -92,8 +94,10 @@ export function KbsProvider(props: KbsProviderProps) {
     : null;
 
   return (
-    <kbsDispatchContext.Provider value={kbsDispatch}>
-      <div {...divProps}>{props.children}</div>
-    </kbsDispatchContext.Provider>
+    <kbsContext.Provider value={kbsState}>
+      <kbsDispatchContext.Provider value={kbsDispatch}>
+        <div {...divProps}>{props.children}</div>
+      </kbsDispatchContext.Provider>
+    </kbsContext.Provider>
   );
 }

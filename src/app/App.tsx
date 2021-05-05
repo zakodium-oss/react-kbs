@@ -1,21 +1,17 @@
-import { useKbsGlobalShortcuts } from '../component';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
+import Dashboard from './Dashboard';
 import Navigation from './Navigation';
 
 export function App() {
-  useKbsGlobalShortcuts([
-    {
-      key: ['t', 'u'],
-      alt: true,
-      handler() {
-        // eslint-disable-next-line no-alert
-        alert('TEST');
-      },
-    },
-  ]);
   return (
-    <div className="w-screen h-screen">
-      <Navigation />
-    </div>
+    <HashRouter>
+      <div className="flex flex-row w-screen h-screen">
+        <Navigation />
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+        </Switch>
+      </div>
+    </HashRouter>
   );
 }

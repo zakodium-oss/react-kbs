@@ -1,18 +1,43 @@
 import { KeyboardEvent } from 'react';
 
-import { KbsShortcut } from '../types';
+import { KbsShortcut, KbsShortcutKey } from '../types';
 
 import { isMultiplatformCtrlKey } from './macInterop';
 
+interface Modifiers {
+  ctrl?: boolean;
+  shift?: boolean;
+  alt?: boolean;
+}
+
+const defaultModifiers: Modifiers = {
+  ctrl: false,
+  shift: false,
+  alt: false,
+};
+
 export function shortcutToKeys(shortcut: KbsShortcut): string[] {
-  const keyEnd = `ctrl[${boolToString(shortcut.ctrl)}]_alt[${boolToString(
-    shortcut.alt,
-  )}]_shift[${boolToString(shortcut.shift)}]`;
-  if (typeof shortcut.key === 'string') {
-    return [`key[${shortcut.key.toLowerCase()}]_${keyEnd}`];
+  if (typeof shortcut.shortcut === 'string') {
+    return [shortcutElementToKey(shortcut.shortcut, defaultModifiers)];
+  } else if (Array.isArray(shortcut.shortcut)) {
+    return shortcut.shortcut.map(shortcutObjectToKey);
   } else {
-    return shortcut.key.map((key) => `key[${key.toLowerCase()}]_${keyEnd}`);
+    return [shortcutObjectToKey(shortcut.shortcut)];
   }
+}
+
+function shortcutObjectToKey(shortcut: string | KbsShortcutKey) {
+  return typeof shortcut === 'string'
+    ? shortcutElementToKey(shortcut, defaultModifiers)
+    : shortcutElementToKey(shortcut.key, shortcut);
+}
+
+export function shortcutElementToKey(shortcut: string, modifiers: Modifiers) {
+  return `key[${shortcut.toLowerCase()}]_ctrl[${boolToString(
+    modifiers.ctrl,
+  )}]_alt[${boolToString(modifiers.alt)}]_shift[${boolToString(
+    modifiers.shift,
+  )}]`;
 }
 
 export function eventToKey(event: KeyboardEvent<HTMLDivElement>): string {

@@ -18,17 +18,19 @@ export interface KbsProviderProps {
 interface KbsState {
   inputShortcuts: KbsDefinition[][];
   combinedShortcuts: Record<string, KbsDefinition>;
-  enabled: boolean;
+  disableCount: number;
 }
 
 type KbsAction =
   | { type: 'INIT'; shortcuts: KbsDefinition[] }
-  | { type: 'CLEANUP'; shortcuts: KbsDefinition[] };
+  | { type: 'CLEANUP'; shortcuts: KbsDefinition[] }
+  | { type: 'DISABLE_GLOBAL' }
+  | { type: 'ENABLE_GLOBAL' };
 
 const initialKbsState: KbsState = {
   inputShortcuts: [],
   combinedShortcuts: {},
-  enabled: true,
+  disableCount: 0,
 };
 
 export const kbsContext = createContext<KbsState>(initialKbsState);
@@ -63,6 +65,12 @@ function kbsReducer(state: KbsState, action: KbsAction): KbsState {
         combinedShortcuts: combineShortcuts(newInputs),
       };
     }
+    case 'DISABLE_GLOBAL': {
+      return { ...state, disableCount: state.disableCount + 1 };
+    }
+    case 'ENABLE_GLOBAL': {
+      return { ...state, disableCount: state.disableCount - 1 };
+    }
     default:
       throw new Error('unreachable');
   }
@@ -85,13 +93,14 @@ export function KbsProvider(props: KbsProviderProps) {
     }
   }
 
-  const divProps = kbsState.enabled
-    ? {
-        tabIndex: 0,
-        style: divStyle,
-        onKeyDown: handleKeyDown,
-      }
-    : null;
+  const divProps =
+    kbsState.disableCount === 0
+      ? {
+          tabIndex: 0,
+          style: divStyle,
+          onKeyDown: handleKeyDown,
+        }
+      : null;
 
   return (
     <kbsContext.Provider value={kbsState}>

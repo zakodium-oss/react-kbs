@@ -10,6 +10,7 @@ export function useKbs(shortcuts: KbsDefinition[]) {
   ]);
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+      if (event.currentTarget !== event.target) return;
       const key = eventToKey(event);
       const shortcut = combinedShortcuts[key];
       if (shortcut) {

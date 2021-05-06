@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.3](https://www.github.com/zakodium/react-kbs/compare/v0.1.2...v0.1.3) (2021-05-06)
+
+
+### Bug Fixes
+
+* do not wrap global handler in a div ([b8afafc](https://www.github.com/zakodium/react-kbs/commit/b8afafcfcaef64d6c4173e6b549dbac7e6018ee5))
+
 ### [0.1.2](https://www.github.com/zakodium/react-kbs/compare/v0.1.1...v0.1.2) (2021-05-06)
 
 

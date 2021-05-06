@@ -45,7 +45,9 @@ export function shortcutElementToKey(shortcut: string, modifiers: Modifiers) {
   }
 }
 
-export function eventToKey(event: KeyboardEvent<HTMLDivElement>): string {
+export function eventToKey(
+  event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
+): string {
   return `key[${event.key.toLowerCase()}]_ctrl[${boolToString(
     isMultiplatformCtrlKey(event),
   )}]_alt[${boolToString(event.altKey)}]_shift[${boolToString(

@@ -4,7 +4,7 @@ import {
   useContext,
   useReducer,
   Dispatch,
-  KeyboardEvent,
+  useEffect,
 } from 'react';
 
 import { KbsDefinition } from './types';
@@ -76,40 +76,34 @@ function kbsReducer(state: KbsState, action: KbsAction): KbsState {
   }
 }
 
-const divStyle = {
-  outline: 'none',
-};
-
 export function KbsProvider(props: KbsProviderProps) {
   const [kbsState, kbsDispatch] = useReducer(kbsReducer, initialKbsState);
 
-  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (!(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')) {
-      return;
+  useEffect(() => {
+    if (kbsState.disableCount !== 0) return;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (
+        event.target !== document.body &&
+        !(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')
+      ) {
+        return;
+      }
+      const key = eventToKey(event);
+      const shortcut = kbsState.combinedShortcuts[key];
+      if (shortcut) {
+        event.stopPropagation();
+        event.preventDefault();
+        shortcut.handler(event);
+      }
     }
-    const key = eventToKey(event);
-    const shortcut = kbsState.combinedShortcuts[key];
-    if (shortcut) {
-      event.stopPropagation();
-      event.preventDefault();
-      shortcut.handler(event);
-    }
-  }
-
-  const divProps =
-    kbsState.disableCount === 0
-      ? {
-          tabIndex: 0,
-          style: divStyle,
-          onKeyDown: handleKeyDown,
-          'data-kbs-receiver': true,
-        }
-      : null;
+    document.body.addEventListener('keydown', handleKeyDown);
+    return () => document.body.removeEventListener('keydown', handleKeyDown);
+  }, [kbsState.disableCount, kbsState.combinedShortcuts]);
 
   return (
     <kbsContext.Provider value={kbsState}>
       <kbsDispatchContext.Provider value={kbsDispatch}>
-        <div {...divProps}>{props.children}</div>
+        {props.children}
       </kbsDispatchContext.Provider>
     </kbsContext.Provider>
   );

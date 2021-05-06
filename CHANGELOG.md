@@ -1,5 +1,14 @@
 # Changelog
 
+### [0.1.1](https://www.github.com/zakodium/react-kbs/compare/v0.1.0...v0.1.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* correctly check for event target ([bfe61a7](https://www.github.com/zakodium/react-kbs/commit/bfe61a7a55af0e8206b578e8865b490e8bc66e49))
+* specify prepack script ([c7b841b](https://www.github.com/zakodium/react-kbs/commit/c7b841b4224e87a5fe8aef2a88bf6acd4b19d7a7)), closes [#4](https://www.github.com/zakodium/react-kbs/issues/4)
+* support SSR builds ([940d18e](https://www.github.com/zakodium/react-kbs/commit/940d18e281da2108ef10b11ed104c376df5baa8e))
+
 ## 0.1.0 (2021-05-05)
 
 

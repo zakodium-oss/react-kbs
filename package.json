@@ -18,6 +18,7 @@
     "dev": "craco start",
     "eslint": "eslint .",
     "eslint-fix": "npm run eslint -- --fix",
+    "prepack": "npm run compile",
     "test": "npm run eslint && npm run check-types"
   },
   "keywords": [

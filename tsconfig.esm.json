@@ -3,6 +3,7 @@
   "include": ["src/component"],
   "compilerOptions": {
     "outDir": "lib-esm",
-    "noEmit": false
+    "noEmit": false,
+    "declaration": true
   }
 }

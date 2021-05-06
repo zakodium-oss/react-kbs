@@ -10,7 +10,9 @@ export function useKbs(shortcuts: KbsDefinition[]) {
   ]);
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-      if (event.currentTarget !== event.target) return;
+      if (!(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')) {
+        return;
+      }
       const key = eventToKey(event);
       const shortcut = combinedShortcuts[key];
       if (shortcut) {
@@ -21,5 +23,5 @@ export function useKbs(shortcuts: KbsDefinition[]) {
     },
     [combinedShortcuts],
   );
-  return { tabIndex: 0, onKeyDown: handleKeyDown };
+  return { tabIndex: 0, onKeyDown: handleKeyDown, 'data-kbs-receiver': true };
 }

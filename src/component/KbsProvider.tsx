@@ -84,7 +84,9 @@ export function KbsProvider(props: KbsProviderProps) {
   const [kbsState, kbsDispatch] = useReducer(kbsReducer, initialKbsState);
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.currentTarget !== event.target) return;
+    if (!(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')) {
+      return;
+    }
     const key = eventToKey(event);
     const shortcut = kbsState.combinedShortcuts[key];
     if (shortcut) {
@@ -100,6 +102,7 @@ export function KbsProvider(props: KbsProviderProps) {
           tabIndex: 0,
           style: divStyle,
           onKeyDown: handleKeyDown,
+          'data-kbs-receiver': true,
         }
       : null;
 

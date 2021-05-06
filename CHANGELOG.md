@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.2](https://www.github.com/zakodium/react-kbs/compare/v0.1.1...v0.1.2) (2021-05-06)
+
+
+### Bug Fixes
+
+* include typings in distribution ([b79ad3d](https://www.github.com/zakodium/react-kbs/commit/b79ad3de3a2f7f9295d82b34d1f9bf15ca2b4b53))
+
 ### [0.1.1](https://www.github.com/zakodium/react-kbs/compare/v0.1.0...v0.1.1) (2021-05-06)
 
 

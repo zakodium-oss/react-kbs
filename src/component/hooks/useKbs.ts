@@ -5,9 +5,10 @@ import { combineShortcuts } from '../utils/combineShortcuts';
 import { eventToKey } from '../utils/makeKey';
 
 export function useKbs(shortcuts: KbsDefinition[]) {
-  const combinedShortcuts = useMemo(() => combineShortcuts([shortcuts]), [
-    shortcuts,
-  ]);
+  const combinedShortcuts = useMemo(
+    () => combineShortcuts([shortcuts]),
+    [shortcuts],
+  );
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
       if (!(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')) {

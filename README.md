@@ -8,6 +8,10 @@ React library to manage your application's keyboard shortcuts.
 npm i react-kbs
 ```
 
+## Demo
+
+https://zakodium.github.io/react-kbs/
+
 ## Documentation
 
 ### Shortcut definition

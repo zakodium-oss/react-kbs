@@ -7,7 +7,6 @@ import {
   UsersIcon,
 } from '@heroicons/react/outline';
 import clsx from 'clsx';
-import { useMemo } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import { useKbsGlobal } from '../component';
@@ -25,35 +24,33 @@ export default function Navigation() {
   const history = useHistory();
   const { pathname } = useLocation();
 
-  const shortcuts = useMemo(
-    () => [
-      {
-        shortcut: { key: 'PageUp', shift: true },
-        handler() {
-          const currentItem = navigation.findIndex(
-            (item) => item.href === pathname,
-          );
-          if (currentItem === -1 || currentItem === 0) return;
-          history.push(navigation[currentItem - 1].href);
-        },
-        meta: { description: 'Go to previous page' },
+  const shortcuts = [
+    {
+      shortcut: { key: 'PageUp', shift: true },
+      handler() {
+        const currentItem = navigation.findIndex(
+          (item) => item.href === pathname,
+        );
+        if (currentItem === -1 || currentItem === 0) return;
+        history.push(navigation[currentItem - 1].href);
       },
-      {
-        shortcut: { key: 'PageDown', shift: true },
-        handler() {
-          const currentItem = navigation.findIndex(
-            (item) => item.href === pathname,
-          );
-          if (currentItem === -1 || currentItem === navigation.length - 1) {
-            return;
-          }
-          history.push(navigation[currentItem + 1].href);
-        },
-        meta: { description: 'Go to next page' },
+      meta: { description: 'Go to previous page' },
+    },
+    {
+      shortcut: { key: 'PageDown', shift: true },
+      handler() {
+        const currentItem = navigation.findIndex(
+          (item) => item.href === pathname,
+        );
+        if (currentItem === -1 || currentItem === navigation.length - 1) {
+          return;
+        }
+        history.push(navigation[currentItem + 1].href);
       },
-    ],
-    [history, pathname],
-  );
+      meta: { description: 'Go to next page' },
+    },
+  ];
+
   useKbsGlobal(shortcuts);
 
   return (

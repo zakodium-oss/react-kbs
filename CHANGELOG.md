@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://www.github.com/zakodium/react-kbs/compare/v0.1.3...v0.2.0) (2021-07-12)
+
+
+### Features
+
+* add useKbsGlobalList and refactor metadata ([9ec9244](https://www.github.com/zakodium/react-kbs/commit/9ec924423192766325b1b62925bd2b54643f78ac))
+
 ### [0.1.3](https://www.github.com/zakodium/react-kbs/compare/v0.1.2...v0.1.3) (2021-05-06)
 
 

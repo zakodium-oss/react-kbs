@@ -1,6 +1,6 @@
 {
   "name": "react-kbs",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "React library to manage your application's keyboard shortcuts",
   "homepage": ".",
   "main": "./lib-cjs/index.js",

@@ -63,7 +63,7 @@ export default function Navigation() {
           alt="Workflow"
         />
       </div>
-      <div className="flex flex-col flex-grow mt-5">
+      <div className="flex flex-col mt-5">
         <nav className="flex-1 px-2 space-y-1 bg-white" aria-label="Sidebar">
           {navigation.map((item) => (
             <Link
@@ -101,6 +101,7 @@ export default function Navigation() {
             </Link>
           ))}
         </nav>
+        <div className="px-2 mt-5">{`Press "Shift+PageUp/PageDown" to navigate`}</div>
       </div>
     </div>
   );

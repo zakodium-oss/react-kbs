@@ -7,7 +7,8 @@ import {
   useEffect,
 } from 'react';
 
-import { KbsDefinition } from './types';
+import { KbsDefinition, KbsInternalShortcut } from './types';
+import { cleanShortcuts } from './utils/cleanShortcuts';
 import { combineShortcuts } from './utils/combineShortcuts';
 import { eventToKey } from './utils/makeKey';
 
@@ -17,7 +18,8 @@ export interface KbsProviderProps {
 
 interface KbsState {
   inputShortcuts: KbsDefinition[][];
-  combinedShortcuts: Record<string, KbsDefinition>;
+  cleanedShortcuts: KbsInternalShortcut[];
+  combinedShortcuts: Record<string, KbsInternalShortcut>;
   disableCount: number;
 }
 
@@ -29,6 +31,7 @@ type KbsAction =
 
 const initialKbsState: KbsState = {
   inputShortcuts: [],
+  cleanedShortcuts: [],
   combinedShortcuts: {},
   disableCount: 0,
 };
@@ -49,20 +52,24 @@ function kbsReducer(state: KbsState, action: KbsAction): KbsState {
   switch (action.type) {
     case 'INIT': {
       const newInputs = [...state.inputShortcuts, action.shortcuts];
+      const cleanedShortcuts = cleanShortcuts(newInputs);
       return {
         ...state,
         inputShortcuts: newInputs,
-        combinedShortcuts: combineShortcuts(newInputs),
+        cleanedShortcuts,
+        combinedShortcuts: combineShortcuts(cleanedShortcuts),
       };
     }
     case 'CLEANUP': {
       const newInputs = state.inputShortcuts.filter(
         (shortcuts) => shortcuts !== action.shortcuts,
       );
+      const cleanedShortcuts = cleanShortcuts(newInputs);
       return {
         ...state,
         inputShortcuts: newInputs,
-        combinedShortcuts: combineShortcuts(newInputs),
+        cleanedShortcuts,
+        combinedShortcuts: combineShortcuts(cleanedShortcuts),
       };
     }
     case 'DISABLE_GLOBAL': {

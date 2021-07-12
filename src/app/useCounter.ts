@@ -5,16 +5,18 @@ export function useCounter() {
   const shortcuts = useMemo(
     () => [
       {
-        shortcut: 'i',
+        shortcut: ['i', 'c'],
         handler() {
           setCounter((current) => current + 1);
         },
+        meta: { description: 'Increment counter' },
       },
       {
         shortcut: 'd',
         handler() {
           setCounter((current) => current - 1);
         },
+        meta: { description: 'Decrement counter' },
       },
     ],
     [],

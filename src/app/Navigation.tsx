@@ -36,6 +36,7 @@ export default function Navigation() {
           if (currentItem === -1 || currentItem === 0) return;
           history.push(navigation[currentItem - 1].href);
         },
+        meta: { description: 'Go to previous page' },
       },
       {
         shortcut: { key: 'PageDown', shift: true },
@@ -48,6 +49,7 @@ export default function Navigation() {
           }
           history.push(navigation[currentItem + 1].href);
         },
+        meta: { description: 'Go to next page' },
       },
     ],
     [history, pathname],
@@ -101,7 +103,11 @@ export default function Navigation() {
             </Link>
           ))}
         </nav>
-        <div className="px-2 mt-5">{`Press "Shift+PageUp/PageDown" to navigate`}</div>
+        <div className="px-2 mt-5">
+          {`Press "Shift+PageUp/PageDown" to navigate.`}
+          <br />
+          {`Press "?" to show global shortcuts.`}
+        </div>
       </div>
     </div>
   );

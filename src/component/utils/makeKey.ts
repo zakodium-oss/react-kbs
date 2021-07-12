@@ -1,43 +1,28 @@
 import { KeyboardEvent } from 'react';
 
-import { KbsDefinition, KbsKeyDefinition } from '../types';
+import { KbsKeyDefinition, KbsInternalShortcut } from '../types';
 
 import { isMultiplatformCtrlKey } from './macInterop';
 
-interface Modifiers {
+export interface Modifiers {
   ctrl?: boolean;
   shift?: boolean;
   alt?: boolean;
 }
 
-const defaultModifiers: Modifiers = {
-  ctrl: false,
-  shift: undefined,
-  alt: false,
-};
-
-export function shortcutToKeys(shortcut: KbsDefinition): string[] {
-  if (typeof shortcut.shortcut === 'string') {
-    return shortcutElementToKey(shortcut.shortcut, defaultModifiers);
-  } else if (Array.isArray(shortcut.shortcut)) {
-    return shortcut.shortcut.flatMap(shortcutObjectToKey);
-  } else {
-    return shortcutObjectToKey(shortcut.shortcut);
-  }
+export function shortcutToKeys(shortcut: KbsInternalShortcut): string[] {
+  return [
+    ...shortcutObjectToKey(shortcut.shortcut),
+    ...shortcut.aliases.map(shortcutObjectToKey).flat(),
+  ];
 }
 
-function shortcutObjectToKey(shortcut: string | KbsKeyDefinition) {
-  return typeof shortcut === 'string'
-    ? shortcutElementToKey(shortcut, defaultModifiers)
-    : shortcutElementToKey(shortcut.key, shortcut);
-}
-
-export function shortcutElementToKey(shortcut: string, modifiers: Modifiers) {
-  const prefix = `key[${shortcut.toLowerCase()}]_ctrl[${boolToString(
-    modifiers.ctrl,
-  )}]_alt[${boolToString(modifiers.alt)}]`;
-  if (typeof modifiers.shift === 'boolean') {
-    return [`${prefix}_shift[${boolToString(modifiers.shift)}]`];
+export function shortcutObjectToKey(shortcut: KbsKeyDefinition) {
+  const prefix = `key[${shortcut.key}]_ctrl[${boolToString(
+    shortcut.ctrl,
+  )}]_alt[${boolToString(shortcut.alt)}]`;
+  if (typeof shortcut.shift === 'boolean') {
+    return [`${prefix}_shift[${boolToString(shortcut.shift)}]`];
   } else {
     // If `shift` is not specified, allow it regardless of its state during the
     // event. This is to support any keyboard layout.

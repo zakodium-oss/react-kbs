@@ -7,10 +7,27 @@ export interface KbsKeyDefinition {
   shift?: boolean;
 }
 
+export type KbsHandler = (
+  event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
+) => void;
+
+/**
+ * Extend this interface to customize the metadata type.
+ */
+export interface KbsMetadata {}
+
 export interface KbsDefinition {
   shortcut: string | KbsKeyDefinition | Array<string | KbsKeyDefinition>;
-  handler: (
-    event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
-  ) => void;
-  description?: string;
+  handler: KbsHandler;
+  meta?: KbsMetadata;
+}
+
+export interface KbsShortcut {
+  shortcut: KbsKeyDefinition;
+  aliases: KbsKeyDefinition[];
+  meta?: KbsMetadata;
+}
+
+export interface KbsInternalShortcut extends KbsShortcut {
+  handler: KbsHandler;
 }

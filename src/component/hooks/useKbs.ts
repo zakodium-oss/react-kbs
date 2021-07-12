@@ -1,12 +1,13 @@
 import { useCallback, useMemo, KeyboardEvent } from 'react';
 
 import { KbsDefinition } from '../types';
+import { cleanShortcuts } from '../utils/cleanShortcuts';
 import { combineShortcuts } from '../utils/combineShortcuts';
 import { eventToKey } from '../utils/makeKey';
 
 export function useKbs(shortcuts: KbsDefinition[]) {
   const combinedShortcuts = useMemo(
-    () => combineShortcuts([shortcuts]),
+    () => combineShortcuts(cleanShortcuts([shortcuts])),
     [shortcuts],
   );
   const handleKeyDown = useCallback(

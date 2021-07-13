@@ -19,9 +19,9 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy to GitHub pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: dist
-          CLEAN: true
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: gh-pages
+          folder: dist
+          clean: true

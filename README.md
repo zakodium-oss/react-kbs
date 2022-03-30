@@ -191,3 +191,10 @@ declare module 'react-kbs' {
   }
 }
 ```
+
+[npm-image]: https://img.shields.io/npm/v/react-kbs.svg
+[npm-url]: https://npmjs.org/package/react-kbs
+[ci-image]: https://github.com/zakodium-oss/react-kbs/workflows/Node.js%20CI/badge.svg?branch=main
+[ci-url]: https://github.com/zakodium-oss/react-kbs/actions?query=workflow%3A%22Node.js+CI%22
+[download-image]: https://img.shields.io/npm/dm/react-kbs.svg
+[download-url]: https://npmjs.org/package/react-kbs

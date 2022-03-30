@@ -2,25 +2,14 @@ name: Node.js CI
 
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
 
-env:
-  NODE_VERSION: 16.x
-
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Install dependencies
-        run: npm install
-      - name: Run ESLint
-        run: npm run eslint
-      - name: Run Prettier
-        run: npm run prettier
-      - name: Check types
-        run: npm run check-types
+  nodejs:
+    # Documentation: https://github.com/zakodium/workflows#nodejs-ci
+    uses: zakodium/workflows/.github/workflows/nodejs.yml@nodejs-v1
+    with:
+      lint-check-types: true
+      disable-tests: true

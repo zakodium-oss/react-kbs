@@ -1,13 +1,6 @@
-import {
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
-} from '@heroicons/react/outline';
+import { FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { useKbsGlobal } from '../component';
 
@@ -15,13 +8,10 @@ const navigation = [
   { name: 'Dashboard', icon: HomeIcon, href: '/' },
   { name: 'Team', icon: UsersIcon, href: '/team', count: 3 },
   { name: 'Projects', icon: FolderIcon, href: '/projects', count: 4 },
-  { name: 'Calendar', icon: CalendarIcon, href: '/calendar' },
-  { name: 'Documents', icon: InboxIcon, href: '/documents', count: 12 },
-  { name: 'Reports', icon: ChartBarIcon, href: '/reports' },
 ];
 
 export default function Navigation() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const shortcuts = [
@@ -32,7 +22,7 @@ export default function Navigation() {
           (item) => item.href === pathname,
         );
         if (currentItem === -1 || currentItem === 0) return;
-        history.push(navigation[currentItem - 1].href);
+        navigate(navigation[currentItem - 1].href);
       },
       meta: { description: 'Go to previous page' },
     },
@@ -45,7 +35,7 @@ export default function Navigation() {
         if (currentItem === -1 || currentItem === navigation.length - 1) {
           return;
         }
-        history.push(navigation[currentItem + 1].href);
+        navigate(navigation[currentItem + 1].href);
       },
       meta: { description: 'Go to next page' },
     },

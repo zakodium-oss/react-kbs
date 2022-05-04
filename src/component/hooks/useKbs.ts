@@ -4,6 +4,7 @@ import { KbsDefinition } from '../types';
 import { cleanShortcuts } from '../utils/cleanShortcuts';
 import { combineShortcuts } from '../utils/combineShortcuts';
 import { eventToKey } from '../utils/makeKey';
+import { shouldIgnoreElement } from '../utils/shouldIgnoreElement';
 
 export function useKbs(shortcuts: KbsDefinition[]) {
   const combinedShortcuts = useMemo(
@@ -12,7 +13,7 @@ export function useKbs(shortcuts: KbsDefinition[]) {
   );
   const handleKeyDown = useCallback(
     function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-      if (!(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')) {
+      if (shouldIgnoreElement(event.target as HTMLElement)) {
         return;
       }
       const key = eventToKey(event);
@@ -25,5 +26,5 @@ export function useKbs(shortcuts: KbsDefinition[]) {
     },
     [combinedShortcuts],
   );
-  return { tabIndex: 0, onKeyDown: handleKeyDown, 'data-kbs-receiver': true };
+  return { tabIndex: 0, onKeyDown: handleKeyDown };
 }

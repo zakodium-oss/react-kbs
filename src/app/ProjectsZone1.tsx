@@ -12,7 +12,7 @@ export default function ProjectsZone1() {
       className="flex flex-col flex-1 bg-yellow-100 focus:outline-none focus:ring-1 focus:ring-blue-600"
     >
       <div className="h-12 p-2">
-        Local counter: {counter}. Press I to increment and D to decrement.
+        Local counter: {counter}. Press I or C to increment and D to decrement.
       </div>
       <ProjectsZone2 />
     </div>

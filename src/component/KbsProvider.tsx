@@ -11,6 +11,7 @@ import { KbsDefinition, KbsInternalShortcut } from './types';
 import { cleanShortcuts } from './utils/cleanShortcuts';
 import { combineShortcuts } from './utils/combineShortcuts';
 import { eventToKey } from './utils/makeKey';
+import { shouldIgnoreElement } from './utils/shouldIgnoreElement';
 
 export interface KbsProviderProps {
   children: ReactNode;
@@ -89,10 +90,7 @@ export function KbsProvider(props: KbsProviderProps) {
   useEffect(() => {
     if (kbsState.disableCount !== 0) return;
     function handleKeyDown(event: KeyboardEvent) {
-      if (
-        event.target !== document.body &&
-        !(event.target as HTMLDivElement).hasAttribute('data-kbs-receiver')
-      ) {
+      if (shouldIgnoreElement(event.target as HTMLElement)) {
         return;
       }
       const key = eventToKey(event);

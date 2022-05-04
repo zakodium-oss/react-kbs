@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export function useCounter() {
+export function useCounter(allowC = true) {
   const [counter, setCounter] = useState(0);
   const shortcuts = [
     {
-      shortcut: ['i', 'c'],
+      shortcut: allowC ? ['i', 'c'] : ['i'],
       handler() {
         setCounter((current) => current + 1);
       },

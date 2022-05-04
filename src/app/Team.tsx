@@ -7,7 +7,7 @@ export default function Team() {
   useKbsGlobal(shortcuts);
   return (
     <div className="p-4">
-      Team counter: {counter}. Press I to increment and D to decrement.
+      Team counter: {counter}. Press I or C to increment and D to decrement.
     </div>
   );
 }

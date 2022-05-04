@@ -101,7 +101,10 @@ export function MyComponent() {
 ### Local shortcuts
 
 Local shortcuts are shortcuts that are only active when a specific element on
-the page is focused.
+the page, or one of its children, is focused.
+
+It is possible to nest such elements. In that case, the first shortcut definition
+that matches the user input will apply.
 
 To setup local shortcuts, call the `useKbs` hook with an array of
 [shortcut definitions](#shortcut-definition) and pass the value it returns
@@ -110,8 +113,6 @@ attributes will be set:
 
 - `tabIndex={0}`: makes the element focusable
 - `onKeyDown={handler}`: event handler
-- `data-kbs-receiver={true}`: internal attribute necessary to differenciate from
-  other focusable elements
 
 ```js
 function MyComponent(props) {
@@ -129,6 +130,17 @@ function MyComponent(props) {
   );
 }
 ```
+
+### Effect of focus on keyboard shortcuts
+
+When no particular element is focused, global shortcuts take effect.  
+When simple focusable elements (buttons, links, elements that have a `tabindex`),
+are focused, global or local shortcuts will usually be triggered, unless one of
+the following conditions applies:
+
+- The element is an HTML `<input>`, `<textarea>`, or `<select>`.
+- The element is [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable).
+- The element has the `data-kbs-ignore` attribute.
 
 ### Disable global shortcuts
 

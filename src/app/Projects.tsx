@@ -44,7 +44,8 @@ export default function Projects() {
         </Switch>
       </div>
       <div>
-        Projects counter: {counter}. Press I to increment and D to decrement.
+        Projects counter: {counter}. Press I or C to increment and D to
+        decrement.
       </div>
       <ProjectsZone1 />
     </div>

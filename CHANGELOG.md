@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/zakodium-oss/react-kbs/compare/v1.0.0...v2.0.0) (2022-05-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Shortcuts will now be executed when buttons, links, or otherwise non-interactive elements are focused.
+
+### Features
+
+* allow to execute shortcuts when buttons and other elements are focused ([fc1e182](https://github.com/zakodium-oss/react-kbs/commit/fc1e1823ace96f821cffe873dc8998865182fc90))
+
 ## [1.0.0](https://www.github.com/zakodium/react-kbs/compare/v0.1.3...v1.0.0) (2021-07-12)
 
 

@@ -12,7 +12,7 @@ export function combineShortcuts(
       if (result[key] !== undefined) {
         // eslint-disable-next-line no-console
         console.warn(
-          `A global shortcut was already defined for key the combination ${key}. It will be overriden.`,
+          `A global shortcut was already defined for key the combination ${key}. It will be overridden.`,
         );
       }
       result[key] = shortcut;

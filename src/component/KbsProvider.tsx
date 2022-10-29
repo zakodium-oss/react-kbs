@@ -10,7 +10,7 @@ import {
 import { KbsDefinition, KbsInternalShortcut } from './types';
 import { cleanShortcuts } from './utils/cleanShortcuts';
 import { combineShortcuts } from './utils/combineShortcuts';
-import { eventToKey } from './utils/makeKey';
+import { eventToKeyOrCode } from './utils/makeKey';
 import { shouldIgnoreElement } from './utils/shouldIgnoreElement';
 
 export interface KbsProviderProps {
@@ -93,8 +93,9 @@ export function KbsProvider(props: KbsProviderProps) {
       if (shouldIgnoreElement(event.target as HTMLElement)) {
         return;
       }
-      const key = eventToKey(event);
-      const shortcut = kbsState.combinedShortcuts[key];
+      const { key, code } = eventToKeyOrCode(event);
+      const shortcut =
+        kbsState.combinedShortcuts[key] ?? kbsState.combinedShortcuts[code];
       if (shortcut) {
         event.stopPropagation();
         event.preventDefault();

@@ -18,9 +18,17 @@ export function shortcutToKeys(shortcut: KbsInternalShortcut): string[] {
 }
 
 export function shortcutObjectToKey(shortcut: KbsKeyDefinition) {
-  const prefix = `key[${shortcut.key}]_ctrl[${boolToString(
-    shortcut.ctrl,
-  )}]_alt[${boolToString(shortcut.alt)}]`;
+  const modifiers = `ctrl[${boolToString(shortcut.ctrl)}]_alt[${boolToString(
+    shortcut.alt,
+  )}]`;
+
+  let prefix: string;
+  if ('key' in shortcut) {
+    prefix = `key[${shortcut.key}]_${modifiers}`;
+  } else {
+    prefix = `code[${shortcut.code}]_${modifiers}`;
+  }
+
   if (typeof shortcut.shift === 'boolean') {
     return [`${prefix}_shift[${boolToString(shortcut.shift)}]`];
   } else {
@@ -30,14 +38,18 @@ export function shortcutObjectToKey(shortcut: KbsKeyDefinition) {
   }
 }
 
-export function eventToKey(
+export function eventToKeyOrCode(
   event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
-): string {
-  return `key[${event.key.toLowerCase()}]_ctrl[${boolToString(
+): { key: string; code: string } {
+  const modifiers = `ctrl[${boolToString(
     isMultiplatformCtrlKey(event),
   )}]_alt[${boolToString(event.altKey)}]_shift[${boolToString(
     event.shiftKey,
   )}]`;
+  return {
+    key: `key[${event.key.toLowerCase()}]_${modifiers}`,
+    code: `code[${event.code.toLowerCase()}]_${modifiers}`,
+  };
 }
 
 function boolToString(bool?: boolean): string {

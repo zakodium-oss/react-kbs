@@ -1,11 +1,20 @@
 import { KeyboardEvent } from 'react';
 
-export interface KbsKeyDefinition {
-  key: string;
+export interface KbsKeyDefinitionModifiers {
   ctrl?: boolean;
   alt?: boolean;
   shift?: boolean;
 }
+
+export interface KbsKeyDefinitionKey extends KbsKeyDefinitionModifiers {
+  key: string;
+}
+
+export interface KbsKeyDefinitionCode extends KbsKeyDefinitionModifiers {
+  code: string;
+}
+
+export type KbsKeyDefinition = KbsKeyDefinitionKey | KbsKeyDefinitionCode;
 
 export type KbsHandler = (
   event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,

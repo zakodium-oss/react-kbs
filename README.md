@@ -37,8 +37,12 @@ A shortcut is defined using an object with at least two fields: `shortcut` and `
 - `shortcut` is a definition of the key combination that must be used to trigger the shortcut. It can be:
   - a string defining the keyboard's key (case-insensitive). Example: `'a'`.
   - an object of the form `{ key: string; ctrl?: boolean; shift?: boolean; alt?: boolean }`. Example: `{ key: 's', ctrl: true }`.
+  - an object of the form `{ code: string; ctrl?: boolean; shift?: boolean; alt?: boolean }`. Example: `{ code: 'Digit1', shift: true }`.
   - an array of such strings and/or objects. This allows to define aliases for the same handler. Example: `['/', { key: 'k', ctrl: true }]`
 - `handler` is the function that will be called when the shortcut is triggered.
+
+Use `key` when you want to refer to the character written by typing on the key
+and `code` when you want to use the physical key code (e.g. `Digit1` for the `1` key).
 
 There are some things to note about the behavior of shortcuts in `react-kbs`:
 

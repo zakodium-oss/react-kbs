@@ -35,17 +35,27 @@ function shortcutToObjects(
     return shortcut.map((shortcut) => {
       if (typeof shortcut === 'string') {
         return { ...defaultModifiers, key: shortcut.toLowerCase() };
-      } else {
+      } else if ('key' in shortcut) {
         return {
           ...defaultModifiers,
           ...shortcut,
           key: shortcut.key.toLowerCase(),
         };
+      } else {
+        return {
+          ...defaultModifiers,
+          ...shortcut,
+          code: shortcut.code.toLowerCase(),
+        };
       }
     });
-  } else {
+  } else if ('key' in shortcut) {
     return [
       { ...defaultModifiers, ...shortcut, key: shortcut.key.toLowerCase() },
+    ];
+  } else {
+    return [
+      { ...defaultModifiers, ...shortcut, code: shortcut.code.toLowerCase() },
     ];
   }
 }

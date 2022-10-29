@@ -2,7 +2,7 @@ import { FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import { useKbsGlobal } from '../component';
+import { KbsDefinition, useKbsGlobal } from '../component';
 
 const navigation = [
   { name: 'Dashboard', icon: HomeIcon, href: '/' },
@@ -14,7 +14,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const shortcuts = [
+  const shortcuts: KbsDefinition[] = [
     {
       shortcut: { key: 'PageUp', shift: true },
       handler() {
@@ -38,6 +38,15 @@ export default function Navigation() {
         navigate(navigation[currentItem + 1].href);
       },
       meta: { description: 'Go to next page' },
+    },
+    {
+      shortcut: Array.from({ length: navigation.length }, (_, i) => ({
+        code: `Digit${i + 1}`,
+        shift: true,
+      })),
+      handler(event) {
+        navigate(navigation[Number(event.code.slice(-1)) - 1].href);
+      },
     },
   ];
 
@@ -92,6 +101,8 @@ export default function Navigation() {
         </nav>
         <div className="px-2 mt-5">
           {`Press "Shift+PageUp/PageDown" to navigate.`}
+          <br />
+          {`Press "Shift+Number" to focus on the corresponding navigation item.`}
           <br />
           {`Press "?" to show global shortcuts.`}
         </div>

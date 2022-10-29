@@ -41,8 +41,8 @@ A shortcut is defined using an object with at least two fields: `shortcut` and `
   - an array of such strings and/or objects. This allows to define aliases for the same handler. Example: `['/', { key: 'k', ctrl: true }]`
 - `handler` is the function that will be called when the shortcut is triggered.
 
-Use `key` when you want to refer to the character written by typing on the key
-and `code` when you want to use the physical key code (e.g. `Digit1` for the `1` key).
+Use [`key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key) when you want to refer to the character written by typing on the key
+and [`code`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code) when you want to use the physical key code (e.g. `Digit1` for the `1` key).
 
 There are some things to note about the behavior of shortcuts in `react-kbs`:
 

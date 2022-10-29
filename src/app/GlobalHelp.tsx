@@ -59,7 +59,7 @@ function Key({ shortcut }: { shortcut: KbsKeyDefinition }) {
       {shortcut.ctrl && 'ctrl '}
       {shortcut.shift && 'shift '}
       {shortcut.alt && 'alt '}
-      {shortcut.key}
+      {'key' in shortcut ? shortcut.key : shortcut.code}
     </kbd>
   );
 }

@@ -10,8 +10,10 @@ import {
 import { KbsDefinition, KbsInternalShortcut } from './types';
 import { cleanShortcuts } from './utils/cleanShortcuts';
 import { combineShortcuts } from './utils/combineShortcuts';
-import { eventToKeyOrCode } from './utils/makeKey';
-import { shouldIgnoreElement } from './utils/shouldIgnoreElement';
+import {
+  getKeyDownHandler,
+  useLastTriggerRef,
+} from './utils/getKeyDownHandler';
 
 export interface KbsProviderProps {
   children: ReactNode;
@@ -86,25 +88,17 @@ function kbsReducer(state: KbsState, action: KbsAction): KbsState {
 
 export function KbsProvider(props: KbsProviderProps) {
   const [kbsState, kbsDispatch] = useReducer(kbsReducer, initialKbsState);
+  const lastTrigger = useLastTriggerRef();
 
   useEffect(() => {
     if (kbsState.disableCount !== 0) return;
-    function handleKeyDown(event: KeyboardEvent) {
-      if (shouldIgnoreElement(event.target as HTMLElement)) {
-        return;
-      }
-      const { key, code } = eventToKeyOrCode(event);
-      const shortcut =
-        kbsState.combinedShortcuts[key] ?? kbsState.combinedShortcuts[code];
-      if (shortcut) {
-        event.stopPropagation();
-        event.preventDefault();
-        shortcut.handler(event);
-      }
-    }
+    const handleKeyDown = getKeyDownHandler(
+      lastTrigger,
+      kbsState.combinedShortcuts,
+    );
     document.body.addEventListener('keydown', handleKeyDown);
     return () => document.body.removeEventListener('keydown', handleKeyDown);
-  }, [kbsState.disableCount, kbsState.combinedShortcuts]);
+  }, [kbsState.disableCount, kbsState.combinedShortcuts, lastTrigger]);
 
   return (
     <kbsContext.Provider value={kbsState}>

@@ -1,30 +1,22 @@
-import { useCallback, useMemo, KeyboardEvent } from 'react';
+import { useMemo } from 'react';
 
 import { KbsDefinition } from '../types';
 import { cleanShortcuts } from '../utils/cleanShortcuts';
 import { combineShortcuts } from '../utils/combineShortcuts';
-import { eventToKeyOrCode } from '../utils/makeKey';
-import { shouldIgnoreElement } from '../utils/shouldIgnoreElement';
+import {
+  getKeyDownHandler,
+  useLastTriggerRef,
+} from '../utils/getKeyDownHandler';
 
 export function useKbs(shortcuts: KbsDefinition[]) {
+  const lastTrigger = useLastTriggerRef();
   const combinedShortcuts = useMemo(
     () => combineShortcuts(cleanShortcuts([shortcuts])),
     [shortcuts],
   );
-  const handleKeyDown = useCallback(
-    function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-      if (shouldIgnoreElement(event.target as HTMLElement)) {
-        return;
-      }
-      const { key, code } = eventToKeyOrCode(event);
-      const shortcut = combinedShortcuts[key] ?? combinedShortcuts[code];
-      if (shortcut) {
-        event.preventDefault();
-        event.stopPropagation();
-        shortcut.handler(event);
-      }
-    },
-    [combinedShortcuts],
+  const handleKeyDown = useMemo(
+    () => getKeyDownHandler(lastTrigger, combinedShortcuts),
+    [lastTrigger, combinedShortcuts],
   );
   return { tabIndex: 0, onKeyDown: handleKeyDown };
 }

@@ -1,13 +1,19 @@
 import { useState } from 'react';
 
-export function useCounter(allowC = true) {
+import { KbsDefinition } from '../component';
+
+export function useCounter(
+  options: { allowC?: boolean; maxFrequency?: number } = {},
+) {
+  const { allowC = true, maxFrequency } = options;
   const [counter, setCounter] = useState(0);
-  const shortcuts = [
+  const shortcuts: KbsDefinition[] = [
     {
       shortcut: allowC ? ['i', 'c'] : ['i'],
       handler() {
         setCounter((current) => current + 1);
       },
+      maxFrequency,
       meta: { description: 'Increment counter' },
     },
     {

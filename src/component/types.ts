@@ -26,9 +26,23 @@ export type KbsHandler = (
 export interface KbsMetadata {}
 
 export interface KbsDefinition {
+  /**
+   * The definition of key(s) that will trigger the shortcut.
+   */
   shortcut: string | KbsKeyDefinition | Array<string | KbsKeyDefinition>;
+  /**
+   * The handler function to call when the shortcut is triggered.
+   */
   handler: KbsHandler;
+  /**
+   * Optional metadata to store with the shortcut.
+   */
   meta?: KbsMetadata;
+  /**
+   * If specified, the shortcut will be triggered at most `maxFrequency` times
+   * per second when a key is held down.
+   */
+  maxFrequency?: number;
 }
 
 export interface KbsShortcut {
@@ -39,4 +53,5 @@ export interface KbsShortcut {
 
 export interface KbsInternalShortcut extends KbsShortcut {
   handler: KbsHandler;
+  maxFrequency: number;
 }

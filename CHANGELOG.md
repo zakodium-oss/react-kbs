@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/zakodium-oss/react-kbs/compare/v2.0.0...v2.1.0) (2022-10-29)
+
+
+### Features
+
+* add `maxFrequency` option ([#18](https://github.com/zakodium-oss/react-kbs/issues/18)) ([f9b5d2f](https://github.com/zakodium-oss/react-kbs/commit/f9b5d2fb30a2144898c1eaad840f2969a729c481))
+* add support for defining shortcuts with `code` instead of `key` ([4206b9d](https://github.com/zakodium-oss/react-kbs/commit/4206b9ddb194fa1e35c36505e03ef50e57f55f9a))
+
+
+### Documentation
+
+* update documentation on code ([#17](https://github.com/zakodium-oss/react-kbs/issues/17)) ([2bb6ef7](https://github.com/zakodium-oss/react-kbs/commit/2bb6ef794dca7e9ea0dcae3c781e6853c1f9f22b))
+
 ## [2.0.0](https://github.com/zakodium-oss/react-kbs/compare/v1.0.0...v2.0.0) (2022-05-04)
 
 

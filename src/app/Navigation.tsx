@@ -1,4 +1,4 @@
-import { FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/outline';
+import { FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 

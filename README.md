@@ -40,6 +40,10 @@ A shortcut is defined using an object with at least two fields: `shortcut` and `
   - an object of the form `{ code: string; ctrl?: boolean; shift?: boolean; alt?: boolean }`. Example: `{ code: 'Digit1', shift: true }`.
   - an array of such strings and/or objects. This allows to define aliases for the same handler. Example: `['/', { key: 'k', ctrl: true }]`
 - `handler` is the function that will be called when the shortcut is triggered.
+- `meta` is an optional object that can be used to store any additional information about the shortcut.
+  It will be available in the data returned by `useKbsGlobalList()`.
+- `maxFrequency` is an optional number that defines the maximum number of times the shortcut can be triggered per second.
+  This only affects repeated triggers of the same shortcut when a key is held down.
 
 Use [`key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key) when you want to refer to the character written by typing on the key
 and [`code`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code) when you want to use the physical key code (e.g. `Digit1` for the `1` key).

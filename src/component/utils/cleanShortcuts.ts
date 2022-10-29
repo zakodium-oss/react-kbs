@@ -20,6 +20,7 @@ export function cleanShortcuts(
         aliases,
         handler: definition.handler,
         meta: definition.meta,
+        maxFrequency: definition.maxFrequency ?? 0,
       });
     }
   }

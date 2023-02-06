@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/zakodium-oss/react-kbs/compare/v2.1.0...v2.1.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* allow to call `useKbsDisableGlobal` outside of context ([5ff073a](https://github.com/zakodium-oss/react-kbs/commit/5ff073ae5af14b7a10797089db0716e60cc72758))
+
 ## [2.1.0](https://github.com/zakodium-oss/react-kbs/compare/v2.0.0...v2.1.0) (2022-10-29)
 
 

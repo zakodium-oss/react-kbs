@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import { useKbsDispatch } from '../KbsProvider';
+import { useKbsUncheckedDispatch } from '../KbsProvider';
 
 export function useKbsDisableGlobal(disabled = true) {
-  const kbsDispatch = useKbsDispatch();
+  const kbsDispatch = useKbsUncheckedDispatch();
   useEffect(() => {
-    if (!disabled) return;
+    if (!disabled || !kbsDispatch) return;
     kbsDispatch({ type: 'DISABLE_GLOBAL' });
     return () => kbsDispatch({ type: 'ENABLE_GLOBAL' });
   }, [kbsDispatch, disabled]);

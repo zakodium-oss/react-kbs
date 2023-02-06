@@ -43,6 +43,10 @@ export const kbsContext = createContext<KbsState>(initialKbsState);
 
 const kbsDispatchContext = createContext<Dispatch<KbsAction> | null>(null);
 
+export function useKbsUncheckedDispatch() {
+  return useContext(kbsDispatchContext);
+}
+
 export function useKbsDispatch() {
   const dispatch = useContext(kbsDispatchContext);
   if (!dispatch) {

@@ -6,7 +6,7 @@ import { KbsProvider } from './component';
 
 import './index.css';
 
-const root = document.getElementById('root');
+const root = document.querySelector('#root');
 if (!root) {
   throw new Error('No root element found');
 }

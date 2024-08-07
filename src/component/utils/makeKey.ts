@@ -1,6 +1,6 @@
 import { KeyboardEvent } from 'react';
 
-import { KbsKeyDefinition, KbsInternalShortcut } from '../types';
+import { KbsInternalShortcut, KbsKeyDefinition } from '../types';
 
 import { isMultiplatformCtrlKey } from './macInterop';
 
@@ -13,7 +13,7 @@ export interface Modifiers {
 export function shortcutToKeys(shortcut: KbsInternalShortcut): string[] {
   return [
     ...shortcutObjectToKey(shortcut.shortcut),
-    ...shortcut.aliases.map(shortcutObjectToKey).flat(),
+    ...shortcut.aliases.flatMap(shortcutObjectToKey),
   ];
 }
 

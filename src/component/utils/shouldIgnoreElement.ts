@@ -4,6 +4,6 @@ export function shouldIgnoreElement(element: HTMLElement): boolean {
   return (
     inputElements.has(element.tagName) ||
     element.isContentEditable ||
-    element.hasAttribute('data-kbs-ignore')
+    Object.hasOwn(element.dataset, 'kbsIgnore')
   );
 }

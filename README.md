@@ -26,7 +26,7 @@ npm i react-kbs
 
 ## Demo
 
-https://zakodium-oss.github.io/react-kbs/
+https://react-kbs.pages.dev/
 
 ## Documentation
 

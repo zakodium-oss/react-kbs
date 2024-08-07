@@ -23,6 +23,7 @@ export type KbsHandler = (
 /**
  * Extend this interface to customize the metadata type.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface KbsMetadata {}
 
 export interface KbsDefinition {

@@ -4,7 +4,7 @@ import ts from 'eslint-config-zakodium/ts';
 import unicorn from 'eslint-config-zakodium/unicorn';
 
 export default defineConfig(
-  globalIgnores(['build', 'dist', 'lib-cjs', 'lib-esm']),
+  globalIgnores(['build', 'dist', 'lib', 'lib-esm']),
   ts,
   react,
   unicorn,

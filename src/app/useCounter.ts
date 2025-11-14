@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { KbsDefinition } from '../component';
+import type { KbsDefinition } from '../component/index.ts';
 
 export function useCounter(
   options: { allowC?: boolean; maxFrequency?: number } = {},

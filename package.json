@@ -1,58 +1,71 @@
 {
   "name": "react-kbs",
   "version": "2.1.1",
+  "license": "MIT",
   "description": "React library to manage your application's keyboard shortcuts",
-  "homepage": ".",
-  "main": "./lib-cjs/index.js",
-  "module": "./lib-esm/index.js",
-  "types": "./lib-esm/index.d.ts",
-  "files": [
-    "lib-cjs",
-    "lib-esm"
-  ],
-  "scripts": {
-    "build": "vite build",
-    "check-types": "tsc --noEmit",
-    "compile": "npm run compile-cjs && npm run compile-esm",
-    "compile-cjs": "tsc --project tsconfig.cjs.json",
-    "compile-esm": "tsc --project tsconfig.esm.json",
-    "dev": "vite",
-    "eslint": "eslint .",
-    "eslint-fix": "npm run eslint -- --fix",
-    "prepack": "npm run compile",
-    "prettier": "prettier --check .",
-    "prettier-write": "prettier --write .",
-    "serve": "vite preview",
-    "test": "npm run eslint && npm run prettier && npm run check-types"
-  },
   "keywords": [
     "react",
     "keyboard",
     "shortcuts",
     "shortcut"
   ],
-  "license": "MIT",
-  "volta": {
-    "node": "20.16.0"
+  "author": "Michaël Zasso",
+  "type": "module",
+  "files": [
+    "lib",
+    "src/component"
+  ],
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "scripts": {
+    "build": "vite build",
+    "check-types": "tsc --noEmit",
+    "clean": "rimraf lib",
+    "dev": "vite",
+    "eslint": "eslint .",
+    "eslint-fix": "eslint . --fix",
+    "prepack": "npm run tsc",
+    "prettier": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "serve": "vite preview",
+    "test": "npm run check-types && npm run eslint && npm run prettier",
+    "tsc": "npm run clean && npm run tsc-build",
+    "tsc-build": "tsc --project tsconfig.build.json"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
-    "@headlessui/react": "^2.1.2",
-    "@heroicons/react": "^2.1.5",
-    "@types/node": "^22.1.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "autoprefixer": "^10.4.20",
+    "@headlessui/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "@zakodium/tsconfig": "^1.0.2",
     "clsx": "^2.1.1",
-    "eslint": "^8.33.0",
-    "eslint-config-zakodium": "^12.0.0",
-    "postcss": "^8.4.41",
-    "prettier": "^3.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
-    "tailwindcss": "^3.4.7",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.5"
+    "eslint": "^9.39.1",
+    "eslint-config-zakodium": "^18.0.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.6",
+    "rimraf": "^6.1.0",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zakodium-oss/react-kbs.git"
+  },
+  "bugs": "https://github.com/zakodium-oss/react-kbs/issues",
+  "homepage": "https://github.com/zakodium-oss/react-kbs#readme",
+  "volta": {
+    "node": "24.11.1"
   }
 }

@@ -1,7 +1,7 @@
-import { useKbsGlobal } from '../component';
+import { useKbsGlobal } from '../component/index.ts';
 
-import Playground from './Playground';
-import { useCounter } from './useCounter';
+import Playground from './Playground.tsx';
+import { useCounter } from './useCounter.ts';
 
 export default function Dashboard() {
   const [counter, shortcuts] = useCounter({ maxFrequency: 2 });

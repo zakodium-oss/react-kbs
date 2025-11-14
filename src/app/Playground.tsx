@@ -9,46 +9,49 @@ export default function Playground() {
       <div className="grid grid-cols-2 gap-1">
         <div>Button</div>
         <button
-          className="p-1 border-2 border-blue-500 bg-blue-200 rounded focus:ring focus:outline-none"
+          className="p-1 border-2 border-blue-500 bg-blue-200 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden"
           type="button"
         >
           Button
         </button>
 
         <div>Link (a)</div>
-        <Link to="" className="underline focus:ring focus:outline-none">
+        <Link
+          to=""
+          className="underline focus:ring-3 focus:ring-blue-400 focus:outline-hidden"
+        >
           Link
         </Link>
 
         <div>Input</div>
         <input
           type="text"
-          className="p-1 border border-blue-400 rounded focus:ring focus:outline-none"
+          className="p-1 border border-blue-400 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden"
         />
 
         <div>Textarea</div>
-        <textarea className="p-1 border border-blue-400 rounded focus:ring focus:outline-none" />
+        <textarea className="p-1 border border-blue-400 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden" />
 
         <div>Select</div>
-        <select className="p-1 border border-blue-400 rounded focus:ring focus:outline-none" />
+        <select className="p-1 border border-blue-400 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden" />
 
         <div>Div contenteditable</div>
         <div
           contentEditable="true"
-          className="p-1 border border-blue-400 rounded focus:ring focus:outline-none"
+          className="p-1 border border-blue-400 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden"
         />
 
         <div>Div with tabindex</div>
         <div
           tabIndex={0}
-          className="p-1 border border-blue-400 rounded focus:ring focus:outline-none"
+          className="p-1 border border-blue-400 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden"
         />
 
         <div>Div with tabindex and data-kbs-ignore</div>
         <div
           tabIndex={0}
           data-kbs-ignore
-          className="p-1 border border-blue-400 rounded focus:ring focus:outline-none"
+          className="p-1 border border-blue-400 rounded-sm focus:ring-3 focus:ring-blue-400 focus:outline-hidden"
         />
       </div>
     </div>

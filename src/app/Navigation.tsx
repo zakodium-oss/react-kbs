@@ -1,10 +1,19 @@
 import { FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { clsx } from 'clsx';
+import type { ComponentType } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { KbsDefinition, useKbsGlobal } from '../component';
+import type { KbsDefinition } from '../component/index.ts';
+import { useKbsGlobal } from '../component/index.ts';
 
-const navigation = [
+interface NavigationItem {
+  name: string;
+  icon: ComponentType<{ className?: string }>;
+  href: string;
+  count?: number;
+}
+
+const navigation: NavigationItem[] = [
   { name: 'Dashboard', icon: HomeIcon, href: '/' },
   { name: 'Team', icon: UsersIcon, href: '/team', count: 3 },
   { name: 'Projects', icon: FolderIcon, href: '/projects', count: 4 },
@@ -22,7 +31,7 @@ export default function Navigation() {
           (item) => item.href === pathname,
         );
         if (currentItem === -1 || currentItem === 0) return;
-        navigate(navigation[currentItem - 1].href);
+        void navigate((navigation.at(currentItem - 1) as NavigationItem).href);
       },
       meta: { description: 'Go to previous page' },
     },
@@ -35,7 +44,7 @@ export default function Navigation() {
         if (currentItem === -1 || currentItem === navigation.length - 1) {
           return;
         }
-        navigate(navigation[currentItem + 1].href);
+        void navigate((navigation.at(currentItem + 1) as NavigationItem).href);
       },
       meta: { description: 'Go to next page' },
     },
@@ -45,7 +54,10 @@ export default function Navigation() {
         shift: true,
       })),
       handler(event) {
-        navigate(navigation[Number(event.code.slice(-1)) - 1].href);
+        void navigate(
+          (navigation.at(Number(event.code.slice(-1)) - 1) as NavigationItem)
+            .href,
+        );
       },
     },
   ];
@@ -54,13 +66,6 @@ export default function Navigation() {
 
   return (
     <div className="flex flex-col w-64 h-full pt-5 pb-4 overflow-y-auto bg-white border-r border-gray-200">
-      <div className="flex items-center flex-shrink-0 px-4">
-        <img
-          className="w-auto h-8"
-          src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-          alt="Workflow"
-        />
-      </div>
       <div className="flex flex-col mt-5">
         <nav className="flex-1 px-2 space-y-1 bg-white" aria-label="Sidebar">
           {navigation.map((item) => (

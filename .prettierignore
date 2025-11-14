@@ -1,8 +1,1 @@
-
-build/
-dist/
-lib-cjs/
-lib-esm/
-node_modules/
-
 CHANGELOG.md

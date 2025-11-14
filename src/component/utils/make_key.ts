@@ -1,8 +1,8 @@
-import { KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 
-import { KbsInternalShortcut, KbsKeyDefinition } from '../types';
+import type { KbsInternalShortcut, KbsKeyDefinition } from '../types.ts';
 
-import { isMultiplatformCtrlKey } from './macInterop';
+import { isMultiplatformCtrlKey } from './apple_interop.ts';
 
 export interface Modifiers {
   ctrl?: boolean;

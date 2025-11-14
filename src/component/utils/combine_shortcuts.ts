@@ -1,6 +1,6 @@
-import { KbsInternalShortcut } from '../types';
+import type { KbsInternalShortcut } from '../types.ts';
 
-import { shortcutToKeys } from './makeKey';
+import { shortcutToKeys } from './make_key.ts';
 
 export function combineShortcuts(
   shortcuts: KbsInternalShortcut[],

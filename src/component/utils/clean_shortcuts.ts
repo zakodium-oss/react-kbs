@@ -1,6 +1,10 @@
-import { KbsDefinition, KbsKeyDefinition, KbsInternalShortcut } from '../types';
+import type {
+  KbsDefinition,
+  KbsInternalShortcut,
+  KbsKeyDefinition,
+} from '../types.ts';
 
-import { Modifiers } from './makeKey';
+import type { Modifiers } from './make_key.ts';
 
 const defaultModifiers: Modifiers = {
   ctrl: false,
@@ -16,7 +20,7 @@ export function cleanShortcuts(
     for (const definition of input) {
       const [main, ...aliases] = shortcutToObjects(definition.shortcut);
       result.push({
-        shortcut: main,
+        shortcut: main as KbsKeyDefinition,
         aliases,
         handler: definition.handler,
         meta: definition.meta,

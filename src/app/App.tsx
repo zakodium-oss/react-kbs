@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
-import { useKbsGlobal } from '../component';
+import { useKbsGlobal } from '../component/index.ts';
 
-import Dashboard from './Dashboard';
-import GlobalHelp from './GlobalHelp';
-import Navigation from './Navigation';
-import Projects from './Projects';
-import Team from './Team';
+import Dashboard from './Dashboard.tsx';
+import GlobalHelp from './GlobalHelp.tsx';
+import Navigation from './Navigation.tsx';
+import Projects from './Projects.tsx';
+import Team from './Team.tsx';
 
-declare module '../component' {
+declare module '../component/index.ts' {
   interface KbsMetadata {
     description: string;
   }

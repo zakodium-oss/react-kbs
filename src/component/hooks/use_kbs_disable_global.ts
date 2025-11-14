@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useKbsUncheckedDispatch } from '../KbsProvider';
+import { useKbsUncheckedDispatch } from '../kbs_context.ts';
 
 export function useKbsDisableGlobal(disabled = true) {
   const kbsDispatch = useKbsUncheckedDispatch();

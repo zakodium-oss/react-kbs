@@ -1,13 +1,13 @@
-import {
+import type {
   KeyboardEvent as ReactKeyboardEvent,
   MutableRefObject,
-  useRef,
 } from 'react';
+import { useRef } from 'react';
 
-import { KbsInternalShortcut } from '../types';
+import type { KbsInternalShortcut } from '../types.ts';
 
-import { eventToKeyOrCode } from './makeKey';
-import { shouldIgnoreElement } from './shouldIgnoreElement';
+import { eventToKeyOrCode } from './make_key.ts';
+import { shouldIgnoreElement } from './should_ignore_element.ts';
 
 export interface LastTriggerData {
   keyOrCode: string;

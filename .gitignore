@@ -105,5 +105,4 @@ dist
 
 build/
 
-lib-cjs/
-lib-esm/
+lib/

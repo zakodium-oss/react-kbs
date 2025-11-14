@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
-import { KbsDefinition } from '../types';
-import { cleanShortcuts } from '../utils/cleanShortcuts';
-import { combineShortcuts } from '../utils/combineShortcuts';
+import type { KbsDefinition } from '../types.ts';
+import { cleanShortcuts } from '../utils/clean_shortcuts.ts';
+import { combineShortcuts } from '../utils/combine_shortcuts.ts';
 import {
   getKeyDownHandler,
   useLastTriggerRef,
-} from '../utils/getKeyDownHandler';
+} from '../utils/get_key_down_handler.ts';
 
 export function useKbs(shortcuts: KbsDefinition[]) {
   const lastTrigger = useLastTriggerRef();

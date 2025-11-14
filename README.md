@@ -1,27 +1,24 @@
-# react-kbs
-
-React library to manage your application's keyboard shortcuts.
-
 <h3 align="center">
-
   <a href="https://www.zakodium.com">
     <img src="https://www.zakodium.com/brand/zakodium-logo-white.svg" width="50" alt="Zakodium logo" />
   </a>
-
   <p>
     Maintained by <a href="https://www.zakodium.com">Zakodium</a>
   </p>
-  
-  [![NPM version][npm-image]][npm-url]
-  [![build status][ci-image]][ci-url]
-  [![npm download][download-image]][download-url]
-
 </h3>
+
+# react-kbs
+
+[![NPM version](https://img.shields.io/npm/v/react-kbs.svg)](https://www.npmjs.com/package/react-kbs)
+[![npm download](https://img.shields.io/npm/dm/react-kbs.svg)](https://www.npmjs.com/package/react-kbs)
+[![license](https://img.shields.io/npm/l/react-kbs.svg)](https://github.com/zakodium-oss/react-kbs/blob/main/LICENSE)
+
+React library to manage your application's keyboard shortcuts.
 
 ## Installation
 
 ```console
-npm i react-kbs
+npm install react-kbs
 ```
 
 ## Demo
@@ -212,9 +209,6 @@ declare module 'react-kbs' {
 }
 ```
 
-[npm-image]: https://img.shields.io/npm/v/react-kbs.svg
-[npm-url]: https://npmjs.org/package/react-kbs
-[ci-image]: https://github.com/zakodium-oss/react-kbs/workflows/Node.js%20CI/badge.svg?branch=main
-[ci-url]: https://github.com/zakodium-oss/react-kbs/actions?query=workflow%3A%22Node.js+CI%22
-[download-image]: https://img.shields.io/npm/dm/react-kbs.svg
-[download-url]: https://npmjs.org/package/react-kbs
+## License
+
+[MIT](./LICENSE)

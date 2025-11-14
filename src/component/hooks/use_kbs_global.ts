@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { useKbsDispatch } from '../KbsProvider';
-import { KbsDefinition } from '../types';
+import { useKbsDispatch } from '../kbs_context.ts';
+import type { KbsDefinition } from '../types.ts';
 
 export function useKbsGlobal(shortcuts: KbsDefinition[]) {
   const kbsDispatch = useKbsDispatch();

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import { kbsContext } from '../KbsProvider';
-import { KbsShortcut } from '../types';
+import { kbsContext } from '../kbs_context.ts';
+import type { KbsShortcut } from '../types.ts';
 
 export function useKbsGlobalList(): KbsShortcut[] {
   return useContext(kbsContext).cleanedShortcuts.map(

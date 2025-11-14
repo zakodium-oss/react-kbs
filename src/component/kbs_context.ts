@@ -1,23 +1,9 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useReducer,
-  Dispatch,
-  useEffect,
-} from 'react';
+import type { Dispatch } from 'react';
+import { createContext, useContext } from 'react';
 
-import { KbsDefinition, KbsInternalShortcut } from './types';
-import { cleanShortcuts } from './utils/cleanShortcuts';
-import { combineShortcuts } from './utils/combineShortcuts';
-import {
-  getKeyDownHandler,
-  useLastTriggerRef,
-} from './utils/getKeyDownHandler';
-
-export interface KbsProviderProps {
-  children: ReactNode;
-}
+import type { KbsDefinition, KbsInternalShortcut } from './types.ts';
+import { cleanShortcuts } from './utils/clean_shortcuts.ts';
+import { combineShortcuts } from './utils/combine_shortcuts.ts';
 
 interface KbsState {
   inputShortcuts: KbsDefinition[][];
@@ -32,7 +18,7 @@ type KbsAction =
   | { type: 'DISABLE_GLOBAL' }
   | { type: 'ENABLE_GLOBAL' };
 
-const initialKbsState: KbsState = {
+export const initialKbsState: KbsState = {
   inputShortcuts: [],
   cleanedShortcuts: [],
   combinedShortcuts: {},
@@ -41,7 +27,9 @@ const initialKbsState: KbsState = {
 
 export const kbsContext = createContext<KbsState>(initialKbsState);
 
-const kbsDispatchContext = createContext<Dispatch<KbsAction> | null>(null);
+export const kbsDispatchContext = createContext<Dispatch<KbsAction> | null>(
+  null,
+);
 
 export function useKbsUncheckedDispatch() {
   return useContext(kbsDispatchContext);
@@ -55,7 +43,7 @@ export function useKbsDispatch() {
   return dispatch;
 }
 
-function kbsReducer(state: KbsState, action: KbsAction): KbsState {
+export function kbsReducer(state: KbsState, action: KbsAction): KbsState {
   switch (action.type) {
     case 'INIT': {
       const newInputs = [...state.inputShortcuts, action.shortcuts];
@@ -88,27 +76,4 @@ function kbsReducer(state: KbsState, action: KbsAction): KbsState {
     default:
       throw new Error('unreachable');
   }
-}
-
-export function KbsProvider(props: KbsProviderProps) {
-  const [kbsState, kbsDispatch] = useReducer(kbsReducer, initialKbsState);
-  const lastTrigger = useLastTriggerRef();
-
-  useEffect(() => {
-    if (kbsState.disableCount !== 0) return;
-    const handleKeyDown = getKeyDownHandler(
-      lastTrigger,
-      kbsState.combinedShortcuts,
-    );
-    document.body.addEventListener('keydown', handleKeyDown);
-    return () => document.body.removeEventListener('keydown', handleKeyDown);
-  }, [kbsState.disableCount, kbsState.combinedShortcuts, lastTrigger]);
-
-  return (
-    <kbsContext.Provider value={kbsState}>
-      <kbsDispatchContext.Provider value={kbsDispatch}>
-        {props.children}
-      </kbsDispatchContext.Provider>
-    </kbsContext.Provider>
-  );
 }

@@ -1,6 +1,6 @@
-import { useKbsGlobal } from '../component';
+import { useKbsGlobal } from '../component/index.ts';
 
-import { useCounter } from './useCounter';
+import { useCounter } from './useCounter.ts';
 
 export default function Team() {
   const [counter, shortcuts] = useCounter();

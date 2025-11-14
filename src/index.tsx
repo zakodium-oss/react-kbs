@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { App } from './app/App';
-import { KbsProvider } from './component';
+import { App } from './app/App.tsx';
+import { KbsProvider } from './component/index.ts';
 
 import './index.css';
 

@@ -1,25 +1,21 @@
 /* eslint-disable react/no-array-index-key */
 
-import {
-  KbsKeyDefinition,
-  KbsShortcut,
-  useKbsDisableGlobal,
-  useKbsGlobalList,
-} from '../component';
+import type { KbsKeyDefinition, KbsShortcut } from '../component/index.ts';
+import { useKbsDisableGlobal, useKbsGlobalList } from '../component/index.ts';
 
 export default function GlobalHelp(props: { close: () => void }) {
   useKbsDisableGlobal();
   const shortcuts = useKbsGlobalList();
   return (
     <div
-      className="absolute top-0 left-0 flex items-center w-screen h-screen bg-gray-500 bg-opacity-70 flex-column"
+      className="absolute top-0 left-0 flex items-center w-screen h-screen bg-gray-500/70 flex-column"
       onClick={(event) => {
         if (event.target === event.currentTarget) {
           props.close();
         }
       }}
     >
-      <div className="w-[350px] p-4 m-auto bg-white rounded shadow-lg">
+      <div className="w-[350px] p-4 m-auto bg-white rounded-sm shadow-lg">
         <h1 className="text-lg font-semibold">Global shortcuts</h1>
         <ul className="mt-4">
           {shortcuts.map((shortcut, i) => (

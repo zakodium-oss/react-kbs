@@ -41,7 +41,7 @@ function shortcutToObjects(
     return [{ ...defaultModifiers, key: shortcut.toLowerCase() }];
   } else if (
     // Cannot use `Array.isArray` because it does not narrow `ReadonlyArray` (<https://github.com/microsoft/TypeScript/issues/17002>)
-    'slice' in shortcut
+    'map' in shortcut
   ) {
     return shortcut.map((shortcut) => {
       if (typeof shortcut === 'string') {

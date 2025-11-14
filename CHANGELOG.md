@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0](https://github.com/zakodium-oss/react-kbs/compare/v2.1.1...v3.0.0) (2025-11-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate project to be ESM-only ([#23](https://github.com/zakodium-oss/react-kbs/issues/23))
+
+### Features
+
+* allow readonly array parameters ([#25](https://github.com/zakodium-oss/react-kbs/issues/25)) ([05e4c82](https://github.com/zakodium-oss/react-kbs/commit/05e4c82bbb0415f191e9a75759ed6fd842dfef7b))
+* migrate project to be ESM-only ([#23](https://github.com/zakodium-oss/react-kbs/issues/23)) ([a25dab5](https://github.com/zakodium-oss/react-kbs/commit/a25dab53fdeefda9f458aa73c0a9011ce4649091))
+
 ## [2.1.1](https://github.com/zakodium-oss/react-kbs/compare/v2.1.0...v2.1.1) (2023-02-06)
 
 

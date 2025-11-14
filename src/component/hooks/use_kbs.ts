@@ -8,7 +8,7 @@ import {
   useLastTriggerRef,
 } from '../utils/get_key_down_handler.ts';
 
-export function useKbs(shortcuts: KbsDefinition[]) {
+export function useKbs(shortcuts: readonly KbsDefinition[]) {
   const lastTrigger = useLastTriggerRef();
   const combinedShortcuts = useMemo(
     () => combineShortcuts(cleanShortcuts([shortcuts])),

@@ -13,7 +13,7 @@ interface NavigationItem {
   count?: number;
 }
 
-const navigation: NavigationItem[] = [
+const navigation: readonly NavigationItem[] = [
   { name: 'Dashboard', icon: HomeIcon, href: '/' },
   { name: 'Team', icon: UsersIcon, href: '/team', count: 3 },
   { name: 'Projects', icon: FolderIcon, href: '/projects', count: 4 },
@@ -23,7 +23,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const shortcuts: KbsDefinition[] = [
+  const shortcuts: readonly KbsDefinition[] = [
     {
       shortcut: { key: 'PageUp', shift: true },
       handler() {

@@ -7,7 +7,7 @@ export function useCounter(
 ) {
   const { allowC = true, maxFrequency } = options;
   const [counter, setCounter] = useState(0);
-  const shortcuts: KbsDefinition[] = [
+  const shortcuts: readonly KbsDefinition[] = [
     {
       shortcut: allowC ? ['i', 'c'] : ['i'],
       handler() {

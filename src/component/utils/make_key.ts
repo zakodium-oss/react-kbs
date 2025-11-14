@@ -10,7 +10,9 @@ export interface Modifiers {
   alt?: boolean;
 }
 
-export function shortcutToKeys(shortcut: KbsInternalShortcut): string[] {
+export function shortcutToKeys(
+  shortcut: KbsInternalShortcut,
+): readonly string[] {
   return [
     ...shortcutObjectToKey(shortcut.shortcut),
     ...shortcut.aliases.flatMap(shortcutObjectToKey),

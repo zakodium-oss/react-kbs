@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useKbsDispatch } from '../kbs_context.ts';
 import type { KbsDefinition } from '../types.ts';
 
-export function useKbsGlobal(shortcuts: KbsDefinition[]) {
+export function useKbsGlobal(shortcuts: readonly KbsDefinition[]) {
   const kbsDispatch = useKbsDispatch();
   useEffect(() => {
     kbsDispatch({ type: 'INIT', shortcuts });

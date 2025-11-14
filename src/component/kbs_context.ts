@@ -6,15 +6,15 @@ import { cleanShortcuts } from './utils/clean_shortcuts.ts';
 import { combineShortcuts } from './utils/combine_shortcuts.ts';
 
 interface KbsState {
-  inputShortcuts: KbsDefinition[][];
-  cleanedShortcuts: KbsInternalShortcut[];
+  inputShortcuts: ReadonlyArray<readonly KbsDefinition[]>;
+  cleanedShortcuts: readonly KbsInternalShortcut[];
   combinedShortcuts: Record<string, KbsInternalShortcut>;
   disableCount: number;
 }
 
 type KbsAction =
-  | { type: 'INIT'; shortcuts: KbsDefinition[] }
-  | { type: 'CLEANUP'; shortcuts: KbsDefinition[] }
+  | { type: 'INIT'; shortcuts: readonly KbsDefinition[] }
+  | { type: 'CLEANUP'; shortcuts: readonly KbsDefinition[] }
   | { type: 'DISABLE_GLOBAL' }
   | { type: 'ENABLE_GLOBAL' };
 

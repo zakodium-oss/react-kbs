@@ -30,7 +30,10 @@ export interface KbsDefinition {
   /**
    * The definition of key(s) that will trigger the shortcut.
    */
-  shortcut: string | KbsKeyDefinition | Array<string | KbsKeyDefinition>;
+  shortcut:
+    | string
+    | KbsKeyDefinition
+    | ReadonlyArray<string | KbsKeyDefinition>;
   /**
    * The handler function to call when the shortcut is triggered.
    */
@@ -48,7 +51,7 @@ export interface KbsDefinition {
 
 export interface KbsShortcut {
   shortcut: KbsKeyDefinition;
-  aliases: KbsKeyDefinition[];
+  aliases: readonly KbsKeyDefinition[];
   meta?: KbsMetadata;
 }
 

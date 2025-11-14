@@ -13,8 +13,8 @@ const defaultModifiers: Modifiers = {
 };
 
 export function cleanShortcuts(
-  inputs: KbsDefinition[][],
-): KbsInternalShortcut[] {
+  inputs: ReadonlyArray<readonly KbsDefinition[]>,
+): readonly KbsInternalShortcut[] {
   const result: KbsInternalShortcut[] = [];
   for (const input of inputs) {
     for (const definition of input) {
@@ -32,11 +32,17 @@ export function cleanShortcuts(
 }
 
 function shortcutToObjects(
-  shortcut: string | KbsKeyDefinition | Array<string | KbsKeyDefinition>,
-): KbsKeyDefinition[] {
+  shortcut:
+    | string
+    | KbsKeyDefinition
+    | ReadonlyArray<string | KbsKeyDefinition>,
+): readonly KbsKeyDefinition[] {
   if (typeof shortcut === 'string') {
     return [{ ...defaultModifiers, key: shortcut.toLowerCase() }];
-  } else if (Array.isArray(shortcut)) {
+  } else if (
+    // Cannot use `Array.isArray` because it does not narrow `ReadonlyArray` (<https://github.com/microsoft/TypeScript/issues/17002>)
+    'map' in shortcut
+  ) {
     return shortcut.map((shortcut) => {
       if (typeof shortcut === 'string') {
         return { ...defaultModifiers, key: shortcut.toLowerCase() };

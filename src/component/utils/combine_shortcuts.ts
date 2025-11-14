@@ -3,7 +3,7 @@ import type { KbsInternalShortcut } from '../types.ts';
 import { shortcutToKeys } from './make_key.ts';
 
 export function combineShortcuts(
-  shortcuts: KbsInternalShortcut[],
+  shortcuts: readonly KbsInternalShortcut[],
 ): Record<string, KbsInternalShortcut> {
   const result: Record<string, KbsInternalShortcut> = {};
   for (const shortcut of shortcuts) {

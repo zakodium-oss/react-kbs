@@ -16,9 +16,12 @@ export interface KbsKeyDefinitionCode extends KbsKeyDefinitionModifiers {
 
 export type KbsKeyDefinition = KbsKeyDefinitionKey | KbsKeyDefinitionCode;
 
-export type KbsHandler = (
+export type KbsHandlerCleaner = (
   event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
 ) => void;
+export type KbsHandler = (
+  event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
+) => KbsHandlerCleaner | void;
 
 /**
  * Extend this interface to customize the metadata type.

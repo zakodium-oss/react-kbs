@@ -39,6 +39,8 @@ export interface KbsDefinition {
     | ReadonlyArray<string | KbsKeyDefinition>;
   /**
    * The handler function to call when the shortcut is triggered.
+   * If the handler returns a cleanup method (`KbsHandlerCleaner`),
+   * it will listen for keyup events and call the cleanup method once a key related to the shortcut is released.
    */
   handler: KbsHandler;
   /**

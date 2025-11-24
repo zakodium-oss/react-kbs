@@ -33,7 +33,7 @@ function parseEvent(
     keyOrCode = code;
   }
 
-  return { keyOrCode, shortcut };
+  return { key, code, keyOrCode, shortcut };
 }
 
 export function getKeyDownHandler(
@@ -47,8 +47,9 @@ export function getKeyDownHandler(
       return;
     }
 
-    const { keyOrCode, shortcut } = parseEvent(event, combinedShortcuts);
+    const { key, keyOrCode, shortcut } = parseEvent(event, combinedShortcuts);
     if (!shortcut) return;
+    const initialKeys = new Set(key.split(']_'));
 
     event.stopPropagation();
     event.preventDefault();
@@ -72,8 +73,9 @@ export function getKeyDownHandler(
       event: KeyboardEvent | ReactKeyboardEvent<HTMLDivElement>,
     ) => {
       if (shouldIgnoreElement(event.target as HTMLElement)) return;
-      const { shortcut } = parseEvent(event, combinedShortcuts);
-      if (!shortcut) return;
+      const { key } = parseEvent(event, combinedShortcuts);
+      const releasedKeys = key.split(']_');
+      if (!releasedKeys.some((key) => initialKeys.has(key))) return;
 
       document.body.removeEventListener('keyup', handleKeyUp);
       cleanup(event);

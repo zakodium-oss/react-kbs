@@ -16,9 +16,12 @@ export interface KbsKeyDefinitionCode extends KbsKeyDefinitionModifiers {
 
 export type KbsKeyDefinition = KbsKeyDefinitionKey | KbsKeyDefinitionCode;
 
-export type KbsHandler = (
+export type KbsHandlerCleaner = (
   event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
 ) => void;
+export type KbsHandler = (
+  event: KeyboardEvent<HTMLDivElement> | globalThis.KeyboardEvent,
+) => KbsHandlerCleaner | void;
 
 /**
  * Extend this interface to customize the metadata type.
@@ -36,6 +39,8 @@ export interface KbsDefinition {
     | ReadonlyArray<string | KbsKeyDefinition>;
   /**
    * The handler function to call when the shortcut is triggered.
+   * If the handler returns a cleanup method (`KbsHandlerCleaner`),
+   * it will listen for keyup events and call the cleanup method once a key related to the shortcut is released.
    */
   handler: KbsHandler;
   /**

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/zakodium-oss/react-kbs/compare/v3.0.0...v3.1.0) (2025-11-25)
+
+
+### Features
+
+* support cleanup handler shortcut api ([#27](https://github.com/zakodium-oss/react-kbs/issues/27)) ([a2a1b44](https://github.com/zakodium-oss/react-kbs/commit/a2a1b4413c7c707f3dc8b3f7098e01804e8cc7d3))
+
 ## [3.0.0](https://github.com/zakodium-oss/react-kbs/compare/v2.1.1...v3.0.0) (2025-11-14)
 
 
